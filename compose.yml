@@ -1,0 +1,17 @@
+name: basic_login_system
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: basic_login_system_db
+    volumes:
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql:ro,z
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
