@@ -19,10 +19,10 @@ class DatabaseConnectionManager:
 		self._update_connection()
 
 	def _update_connection(self) -> None:
-		self.__connection = self._create_connection()
+		self._connection = self._create_connection()
 
-		if self.__connection:
-			self.__cursor = self.__connection.cursor()
+		if self._connection:
+			self._cursor = self._connection.cursor()
 
 	def _create_connection(self) -> (PooledMySQLConnection | MySQLConnectionAbstract | None):
 		connection = None
@@ -44,7 +44,7 @@ class DatabaseConnectionManager:
 		return connection
 
 	def __del__(self) -> None:
-		if 'connection' in locals() and self.__connection.is_connected():
-			self.__cursor.close()
-			self.__connection.close()
+		if 'connection' in locals() and self._connection.is_connected():
+			self._cursor.close()
+			self._connection.close()
 			print("MySQL connection is closed.")
