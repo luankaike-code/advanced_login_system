@@ -16,15 +16,15 @@ class DatabaseConnectionManager:
 		self.__user = user
 		self.__password = password
 
-		self.__update_connection()
+		self._update_connection()
 
-	def __update_connection(self) -> None:
-		self.__connection = self.__create_connection()
+	def _update_connection(self) -> None:
+		self.__connection = self._create_connection()
 
 		if self.__connection:
 			self.__cursor = self.__connection.cursor()
 
-	def __create_connection(self) -> (PooledMySQLConnection | MySQLConnectionAbstract | None):
+	def _create_connection(self) -> (PooledMySQLConnection | MySQLConnectionAbstract | None):
 		connection = None
 		connection_attemps = 0
 
