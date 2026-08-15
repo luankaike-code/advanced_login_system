@@ -27,13 +27,8 @@ class DatabaseConnectionManager:
 	def __create_connection(self) -> (PooledMySQLConnection | MySQLConnectionAbstract | None):
 		connection = None
 		connection_attemps = 0
-		errors = []
 
-		def print_all_throw_errors():
-			for i, error in enumerate(errors):
-				print(f"Error #{i} throw while connecting to MySQL: {error}")
-
-		while connection_attemps < MAX_CONNECTION_ATTEMPS:
+		while connection_attemps < MAX_CONNECTION_ATTEMPS and connection == None:
 			try:
 				connection = mysql.connector.connect(
 					host=self.__host,
@@ -43,10 +38,8 @@ class DatabaseConnectionManager:
 					password=self.__password,
 				)
 			except Error as e:
-				errors.append(e)
 				connection_attemps += 1
-		else:
-			print_all_throw_errors()
+				print(f"Error #{connection_attemps} throw while connecting to MySQL: {e}; attempting again...")
 
 		return connection
 
