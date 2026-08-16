@@ -4,10 +4,10 @@ from typing import List, Dict, Any
 from .database_connection_manager import DatabaseConnectionManager
 
 class DatabaseCommandsManager(DatabaseConnectionManager):
-	def __init__(self, host: str, port: int, database: str, user: str, password: str):
+	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__(host, port, database, user, password)
 
-	def _execute_insert(self, table: str, fields: list[str], values: list[any]):
+	def _execute_insert(self, table: str, fields: list[str], values: list[any]) -> None:
 		table_fields_str = ", ".join(fields)
 		insert_query_within_values = f"INSERT INTO {table} ({table_fields_str})"
 
@@ -28,7 +28,7 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 		self._cursor.execute(select_query_complete, values)
 		return self._cursor.fetchall()
 
-	def _execute_commit(self):	
+	def _execute_commit(self) -> None:	
 			try:
 				self._connection.commit()
 			except Error as commit_err:
