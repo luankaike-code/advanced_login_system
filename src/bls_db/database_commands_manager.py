@@ -1,4 +1,6 @@
 from mysql.connector import Error
+from mysql.connector.types import RowItemType, RowType
+from typing import List, Dict, Any
 from .database_connection_manager import DatabaseConnectionManager
 
 class DatabaseCommandsManager(DatabaseConnectionManager):
@@ -13,6 +15,18 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 		insert_query_with_template_values = f"{insert_query_within_values} VALUES ({template_values})"
 
 		self._cursor.execute(insert_query_with_template_values, values)
+
+	def _execute_select(self, table: str, fields: list[str], where_query="", values: list[any]=[]) -> List[RowType | Dict[str, RowItemType]] | Any:
+		table_fields_str = ", ".join(fields)
+		select_query = f"SELECT {table_fields_str} FROM {table}"
+
+		where_query_striped = where_query.strip()
+		where_query_correct = where_query_striped if where_query_striped.startswith("WHERE") or where_query_striped == "" else f"WHERE {where_query}"
+
+		select_query_complete = f"{select_query} {where_query_correct}"
+
+		self._cursor.execute(select_query_complete, values)
+		return self._cursor.fetchall()
 
 	def _execute_commit(self):	
 			try:
