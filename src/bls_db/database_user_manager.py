@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from .database_commands_manager import DatabaseCommandsManager
+from .errors import DuplicateLoginInformationError
 
 load_dotenv()
 
@@ -30,7 +31,12 @@ class DatabaseUserManager(DatabaseCommandsManager):
 			]
 		)
 
-		return (len(res) == 1, res)
+		res_len = len(res)
+		
+		if res_len > 1:
+			raise DuplicateLoginInformationError(self.user_table_name, res_len, res)
+
+		return (res_len == 1, res)
 
 	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
 		self._execute_insert(
