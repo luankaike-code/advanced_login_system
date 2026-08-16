@@ -1,13 +1,17 @@
 from mysql.connector import Error
 from mysql.connector.types import RowItemType, RowType
 from typing import Literal, List, Dict, Any
+from dotenv import load_dotenv
+import os
 
 from .database_commands_manager import DatabaseCommandsManager
 
+load_dotenv()
 
 class DatabaseUserManager(DatabaseCommandsManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__(host, port, database, user, password)
+		self.user_table_name = os.getenv("TABLE_USERS_NAME")
 
 	def insert_new_user(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
 		try:
@@ -17,7 +21,7 @@ class DatabaseUserManager(DatabaseCommandsManager):
 
 	def check_login_information_without_error_handler(self, identifity: str, identifier_type: Literal["name", "email", "tel"], password: str) -> tuple[bool, List[RowType | Dict[str, RowItemType]] | Any]:
 		res = self._execute_select(
-			table="users",
+			table=self.user_table_name,
 			fields="*",
 			where_query=f"{identifier_type} = %s AND password = %s",
 			values=[
@@ -30,7 +34,7 @@ class DatabaseUserManager(DatabaseCommandsManager):
 
 	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
 		self._execute_insert(
-			table="users",
+			table=self.user_table_name,
 			fields=[
 				"name",
 				"email",
