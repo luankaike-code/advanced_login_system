@@ -1,2 +1,3 @@
-def print_this():
-    print("ai sim mané")
+from .database_user_manager import DatabaseUserManager
+
+__all__ = ["DatabaseUserManager"]
