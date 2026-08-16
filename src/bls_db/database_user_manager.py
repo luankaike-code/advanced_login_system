@@ -11,11 +11,11 @@ class DatabaseUserManager(DatabaseCommandsManager):
 
 	def insert_new_user(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
 		try:
-			self.insert_new_user_within_error_handler(name, email, password, tel, can_view_user_table, can_create_new_user)
+			self.insert_new_user_without_error_handler(name, email, password, tel, can_view_user_table, can_create_new_user)
 		except Error as e:
 			print(f"Error while insert new user: {e}")
 
-	def check_login_information_within_error_handler(self, identifity: str, identifier_type: Literal["name", "email", "tel"], password: str) -> tuple[bool, List[RowType | Dict[str, RowItemType]] | Any]:
+	def check_login_information_without_error_handler(self, identifity: str, identifier_type: Literal["name", "email", "tel"], password: str) -> tuple[bool, List[RowType | Dict[str, RowItemType]] | Any]:
 		res = self._execute_select(
 			table="users",
 			fields="*",
@@ -28,7 +28,7 @@ class DatabaseUserManager(DatabaseCommandsManager):
 
 		return (len(res) == 1, res)
 
-	def insert_new_user_within_error_handler(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
+	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
 		self._execute_insert(
 			table="users",
 			fields=[

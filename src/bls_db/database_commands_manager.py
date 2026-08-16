@@ -9,10 +9,10 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 
 	def _execute_insert(self, table: str, fields: list[str], values: list[any]) -> None:
 		table_fields_str = ", ".join(fields)
-		insert_query_within_values = f"INSERT INTO {table} ({table_fields_str})"
+		insert_query_without_values = f"INSERT INTO {table} ({table_fields_str})"
 
 		template_values = ", ".join(["%s"] * len(fields))
-		insert_query_with_template_values = f"{insert_query_within_values} VALUES ({template_values})"
+		insert_query_with_template_values = f"{insert_query_without_values} VALUES ({template_values})"
 
 		self._cursor.execute(insert_query_with_template_values, values)
 
