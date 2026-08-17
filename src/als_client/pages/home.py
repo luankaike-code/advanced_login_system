@@ -7,10 +7,24 @@ class Home(Page):
 		super().__init__(screenName, baseName, className, useTk, sync, use, geometry, title)
 
 		self._create_widgets()
+
+	def check_login_informations(self):
+		pass
 	
 	def _create_widgets(self):
-		texto = tk.Label(self, text="Hi")
-		texto.pack(padx=20, pady=20)
+		title = tk.Label(self, text="Sistema Avançado de Login")
+		title.pack(padx=10, pady=10)
 
-		inp = Input(self, "test")
-		inp.pack_all_widgets(padx=20, pady=5)
+		self.input_identity = Input(self, "Identificador", "Nome / Email / Telefone")
+		self.input_identity.pack_all_widgets(padx=10, pady=5)
+
+		self.input_password = Input(self, "Senha", "******")
+		self.input_password.pack_all_widgets(padx=10, pady=5)
+
+		self.error_msg = tk.Label(self)
+		self.error_msg.pack(padx=10, pady=10)
+
+		button = tk.Button(self, text="Entrar" ,command=self.check_login_informations)
+		button.pack(padx=10, pady=10)
+
+		
