@@ -9,3 +9,7 @@ class Input(Component):
 			"label": tk.Label(window, text=label),
 			"entry": tk.Entry(window)
 		})
+
+	def get_value(self) -> str:
+		entry: tk.Entry = self._widgets["entry"]
+		return entry.get()
