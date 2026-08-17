@@ -1,5 +1,5 @@
 [project]
-name = "basic-login-system"
+name = "advanced_login_system"
 version = "0.1.0"
 description = ""
 authors = [
@@ -14,9 +14,9 @@ dependencies = [
 
 [tool.poetry]
 packages = [
-	{include = "bls_db", from = "src"},
-	{include = "bls_api", from = "src"},
-	{include = "bls_client", from = "src"},
+	{include = "als_db", from = "src"},
+	{include = "als_api", from = "src"},
+	{include = "als_client", from = "src"},
 ]
 
 [build-system]
