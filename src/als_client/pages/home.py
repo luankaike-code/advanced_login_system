@@ -13,4 +13,4 @@ class Home(Page):
 		texto.pack(padx=20, pady=20)
 
 		inp = Input(self, "test")
-		inp.pack_all_widget(padx=20, pady=5)
+		inp.pack_all_widgets(padx=20, pady=5)
