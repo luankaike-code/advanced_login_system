@@ -1,4 +1,4 @@
 import tkinter as tk
-from pages import Home
+from pages import Login
 
-Home().mainloop()
+Login().mainloop()
