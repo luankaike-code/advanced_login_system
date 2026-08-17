@@ -7,7 +7,7 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__(host, port, database, user, password)
 
-	def _execute_insert(self, table: str, fields: list[str], values: list[Any]) -> None:
+	def _execute_insert(self, table: str, fields: List[str], values: List[Any]) -> None:
 		table_fields_str = ", ".join(fields)
 		insert_query_without_values = f"INSERT INTO {table} ({table_fields_str})"
 
@@ -16,7 +16,7 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 
 		self._cursor.execute(insert_query_with_template_values, values)
 
-	def _execute_select(self, table: str, fields: list[str], where_query="", values: list[Any]=[]) -> List[RowType | Dict[str, RowItemType]] | Any:
+	def _execute_select(self, table: str, fields: List[str], where_query="", values: List[Any]=[]) -> List[RowType | Dict[str, RowItemType]] | Any:
 		table_fields_str = ", ".join(fields)
 		select_query = f"SELECT {table_fields_str} FROM {table}"
 
