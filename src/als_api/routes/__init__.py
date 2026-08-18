@@ -1,3 +1,3 @@
-from .users import users_bp
+from .users import users_blueprint
 
-__all__ = ["users_bp"]
+__all__ = ["users_blueprint"]

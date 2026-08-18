@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 
-users_bp = Blueprint("users", __name__, url_prefix="/users")
+users_blueprint = Blueprint("users", __name__, url_prefix="/users")
 
-@users_bp.route("/login", methods=["POST"])
+@users_blueprint.route("/login", methods=["POST"])
 def list_users():
 	data = request.get_json()
 	print(data)
