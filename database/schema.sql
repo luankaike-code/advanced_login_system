@@ -9,6 +9,14 @@ CREATE TABLE users (
 	has_sudo_access BOOL DEFAULT FALSE
 );
 
+CREATE TABLE connections (
+	connection_id INT PRIMARY KEY AUTO_INCREMENT,
+	user_id INT UNIQUE,
+	token VARCHAR(255) UNIQUE,
+
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
 INSERT INTO users (name, email, password, tel, has_sudo_access) VALUES (
 	"root",
 	"root@root",
