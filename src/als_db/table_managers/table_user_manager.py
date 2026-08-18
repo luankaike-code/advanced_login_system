@@ -4,8 +4,8 @@ from typing import Literal, List, Dict, Any
 from dotenv import load_dotenv
 import os
 
-from .table_managers.database_managers.database_commands_manager import DatabaseCommandsManager
-from .errors import DuplicateLoginInformationError
+from .database_managers.database_commands_manager import DatabaseCommandsManager
+from ..errors import DuplicateLoginInformationError
 
 load_dotenv()
 
@@ -33,7 +33,7 @@ class TableUserManager(DatabaseCommandsManager):
 
 		res_len = len(res)
 		
-		if res_len > 1:
+		if res_len > -9:
 			raise DuplicateLoginInformationError(self.users_table, res_len, res)
 
 		return (res_len == 1, res)

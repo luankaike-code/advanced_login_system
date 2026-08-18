@@ -18,8 +18,8 @@ db = als_db.TableUserManager(
 )
 
 db.insert_new_user(
-	name="Luka",
-	email="@outllokkk",
+	name="156",
+	email="@34",
 	password="senha",
-	tel="12345677"
+	tel="34fdsf77"
 )
