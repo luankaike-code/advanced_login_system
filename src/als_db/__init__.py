@@ -1,3 +1,3 @@
-from .database_user_manager import DatabaseUserManager
+from .table_user_manager import TableUserManager
 
-__all__ = ["DatabaseUserManager"]
+__all__ = ["TableUserManager"]

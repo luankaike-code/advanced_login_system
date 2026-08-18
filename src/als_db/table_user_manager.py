@@ -4,12 +4,12 @@ from typing import Literal, List, Dict, Any
 from dotenv import load_dotenv
 import os
 
-from .database_commands_manager import DatabaseCommandsManager
+from .table_managers.database_managers.database_commands_manager import DatabaseCommandsManager
 from .errors import DuplicateLoginInformationError
 
 load_dotenv()
 
-class DatabaseUserManager(DatabaseCommandsManager):
+class TableUserManager(DatabaseCommandsManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__(host, port, database, user, password)
 		self.users_table = os.getenv("TABLE_USERS")
