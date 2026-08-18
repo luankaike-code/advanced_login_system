@@ -5,7 +5,7 @@ class Page(ctk.CTk):
 		super().__init__()
 
 		self.title(title)
-		self.geometry("400x300")
+		self.geometry(geometry)
 
 	def _create_widgets(self) -> None:
 		pass
