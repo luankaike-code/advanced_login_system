@@ -14,9 +14,9 @@ class DatabaseUserManager(DatabaseCommandsManager):
 		super().__init__(host, port, database, user, password)
 		self.user_table_name = os.getenv("TABLE_USERS_NAME")
 
-	def insert_new_user(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
+	def insert_new_user(self, name: str, email: str, password: str, tel: str, has_sudo_access: bool = False) -> None:
 		try:
-			self.insert_new_user_without_error_handler(name, email, password, tel, can_view_user_table, can_create_new_user)
+			self.insert_new_user_without_error_handler(name, email, password, tel, has_sudo_access)
 		except Error as e:
 			print(f"Error while insert new user: {e}")
 
@@ -38,7 +38,7 @@ class DatabaseUserManager(DatabaseCommandsManager):
 
 		return (res_len == 1, res)
 
-	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, can_view_user_table: bool=False, can_create_new_user: bool=False) -> None:
+	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, has_sudo_access: bool = False) -> None:
 		self._execute_insert(
 			table=self.user_table_name,
 			fields=[
@@ -46,16 +46,14 @@ class DatabaseUserManager(DatabaseCommandsManager):
 				"email",
 				"password",
 				"tel",
-				"can_view_user_table",
-				"can_create_new_user"
+				"has_sudo_access",
 			],
 			values=[
 				name,
 				email,
 				password,
 				tel,
-				can_view_user_table,
-				can_create_new_user
+				has_sudo_access,
 			],
 		)
 
