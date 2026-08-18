@@ -1,4 +1,6 @@
 import customtkinter as CTk
+from .paragraph import Paragraph
+from .hs import H1
 
 class Popup(CTk.CTkToplevel):
 	def __init__(self, *args, title = str, label = str, geometry: str ="200x100", freeze: bool = True, fg_color = None, **kwargs) -> None:
@@ -7,9 +9,9 @@ class Popup(CTk.CTkToplevel):
 		self.title(title)
 		self.geometry(geometry)
 
-		CTk.CTkLabel(self, text=title).pack(pady=10)
+		H1(self, text=title).pack(pady=10)
 
-		CTk.CTkLabel(self, text=label).pack(pady=5)
+		Paragraph(self, text=label).pack(pady=5)
 
 		if freeze:
 			self.grab_set()
