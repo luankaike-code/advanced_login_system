@@ -12,7 +12,7 @@ load_dotenv()
 class DatabaseUserManager(DatabaseCommandsManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__(host, port, database, user, password)
-		self.user_table_name = os.getenv("TABLE_USERS_NAME")
+		self.users_table = os.getenv("TABLE_USERS")
 
 	def insert_new_user(self, name: str, email: str, password: str, tel: str, has_sudo_access: bool = False) -> None:
 		try:
@@ -22,7 +22,7 @@ class DatabaseUserManager(DatabaseCommandsManager):
 
 	def check_login_information_without_error_handler(self, identifity: str, identifier_type: Literal["name", "email", "tel"], password: str) -> tuple[bool, List[RowType | Dict[str, RowItemType]] | Any]:
 		res = self._execute_select(
-			table=self.user_table_name,
+			table=self.users_table,
 			fields="*",
 			where_query=f"{identifier_type} = %s AND password = %s",
 			values=[
@@ -34,13 +34,13 @@ class DatabaseUserManager(DatabaseCommandsManager):
 		res_len = len(res)
 		
 		if res_len > 1:
-			raise DuplicateLoginInformationError(self.user_table_name, res_len, res)
+			raise DuplicateLoginInformationError(self.users_table, res_len, res)
 
 		return (res_len == 1, res)
 
 	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, has_sudo_access: bool = False) -> None:
 		self._execute_insert(
-			table=self.user_table_name,
+			table=self.users_table,
 			fields=[
 				"name",
 				"email",
