@@ -1,4 +1,3 @@
-import tkinter as tk
-from pages import Login
+from.app import App
 
-Login().mainloop()
+App.start()
