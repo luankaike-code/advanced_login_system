@@ -7,4 +7,12 @@ CREATE TABLE users (
 	password VARCHAR(255) NOT NULL,
 	tel VARCHAR(11) UNIQUE,
 	has_sudo_access BOOL DEFAULT FALSE
-)
+);
+
+INSERT INTO users (name, email, password, tel, has_sudo_access) VALUES (
+	"root",
+	"root@root",
+	"@Root123",
+	"00000000",
+	TRUE
+);
