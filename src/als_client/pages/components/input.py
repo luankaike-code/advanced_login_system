@@ -1,15 +1,15 @@
-import tkinter as tk
+import customtkinter as ctk
 from .component import Component
 
 class Input(Component):
-	def __init__(self, window: tk.Tk, label: str, placeholder: str="") -> None:
+	def __init__(self, window: ctk.CTk, label: str, placeholder: str="") -> None:
 		super().__init__()
 
 		self._widgets.update({
-			"label": tk.Label(window, text=label),
-			"entry": tk.Entry(window, placeholder=placeholder)
+			"label": ctk.CTkLabel(window, text=label),
+			"entry": ctk.CTkEntry(window, placeholder_text=placeholder)
 		})
 
 	def get_value(self) -> str:
-		entry: tk.Entry = self._widgets["entry"]
+		entry: ctk.CTkEntry = self._widgets["entry"]
 		return entry.get()
