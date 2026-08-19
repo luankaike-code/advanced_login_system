@@ -1,19 +1,15 @@
-import os, secrets
-from dotenv import load_dotenv
+import secrets
 
-from .database_managers import DatabaseManager
+from .table_manager import TableManager
 
-load_dotenv()
-
-class TableConnectionsManager(DatabaseManager):
+class TableConnectionsManager(TableManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str):
-		super().__init__(host, port, database, user, password)
-		self.connections_table = os.getenv("TABLE_CONNECTIONS")
+		super().__init__("TABLE_CONNECTIONS", host, port, database, user, password)
 
 	def create_new_connection(self, user_id: int):
 		token = secrets.token_hex(127)
 		self._execute_insert(
-			table=self.connections_table,
+			table=self.table_name,
 			fields=[
 				"user_id",
 				"token"
