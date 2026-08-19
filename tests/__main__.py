@@ -9,7 +9,7 @@ database = os.getenv("DATABASE")
 user = os.getenv("DATABASE_USER")
 password = os.getenv("PASSWORD")
 
-db = als_db.TableUserManager(
+db = als_db.TableUsersManager(
 	host=host,
 	port=port,
 	database=database,

@@ -5,7 +5,7 @@ from typing import Literal, List, Dict, Any
 from .table_manager import TableManager
 from ..errors import DuplicateLoginInformationError
 
-class TableUserManager(TableManager):
+class TableUsersManager(TableManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__("TABLE_USERS", host, port, database, user, password)
 
