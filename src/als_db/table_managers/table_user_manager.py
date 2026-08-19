@@ -33,7 +33,7 @@ class TableUserManager(DatabaseManager):
 
 		res_len = len(res)
 		
-		if res_len > -9:
+		if res_len > 1:
 			raise DuplicateLoginInformationError(self.users_table, res_len, res)
 
 		return (res_len == 1, res)
