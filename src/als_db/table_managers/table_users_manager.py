@@ -4,6 +4,7 @@ from typing import Literal, List, Dict, Any
 
 from .table_manager import TableManager
 from ..errors import DuplicateLoginInformationError
+from .types import RowUser
 
 class TableUsersManager(TableManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
@@ -15,7 +16,7 @@ class TableUsersManager(TableManager):
 		except Error as e:
 			print(f"Error while insert new user: {e}")
 
-	def check_login_information_without_error_handler(self, identifity: str, identifier_type: Literal["name", "email", "tel"], password: str) -> tuple[bool, List[RowType | Dict[str, RowItemType]] | Any]:
+	def check_login_information_without_error_handler(self, identifity: str, identifier_type: Literal["name", "email", "tel"], password: str) -> tuple[bool, RowUser | List[RowType | Dict[str, RowItemType]] | Any]:
 		res = self._execute_select(
 			table=self.table_name,
 			fields="*",
@@ -31,7 +32,9 @@ class TableUsersManager(TableManager):
 		if res_len > 1:
 			raise DuplicateLoginInformationError(self.table_name, res_len, res)
 
-		return (res_len == 1, res)
+		res_status = res_len == 1
+
+		return (res_status, RowUser(res[0]) if res_status else res)
 
 	def insert_new_user_without_error_handler(self, name: str, email: str, password: str, tel: str, has_sudo_access: bool = False) -> None:
 		self._execute_insert(
