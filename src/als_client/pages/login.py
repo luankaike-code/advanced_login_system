@@ -10,7 +10,15 @@ class Login(Page):
 		self._create_widgets()
 
 	def check_login_informations(self) -> None:
-		pass
+		identity = self.input_identity.entry_value.get()
+		password = self.input_password.entry_value.get()
+
+		res, status_code = Request.try_login(identity, password)
+
+		if res:
+			self.destroy()
+		else:
+			self.error_msg.text.set(value=f"Error: {status_code}")
 	
 	def _create_widgets(self) -> None:
 		title = H1(self, text="Sistema Avançado de Login")
