@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from .components import Input, Popup, H1, Paragraph, Button
 from .page import Page
+from .als_requests import Request
 
 class Login(Page):
 	def __init__(self, geometry: str = "400x300", title: str = "Login") -> None:
@@ -26,8 +27,6 @@ class Login(Page):
 
 		button = Button(self, text="Entrar" ,command=self.check_login_informations)
 		button.pack(padx=10, pady=10)
-
-		Popup(self, title="erro tal", label="explicação sobre o erro")
 
 
 		
