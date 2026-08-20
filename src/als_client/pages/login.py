@@ -1,5 +1,4 @@
-import customtkinter as ctk
-from .components import Input, Popup, H1, Paragraph, Button
+from .components import Input, H1, Paragraph, Button
 from .page import Page
 from .als_requests import Request
 
