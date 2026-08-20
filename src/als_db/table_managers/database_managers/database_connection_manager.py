@@ -22,7 +22,7 @@ class DatabaseConnectionManager:
 		self._connection = self._create_connection()
 
 		if self._connection:
-			self._cursor = self._connection.cursor()
+			self._cursor = self._connection.cursor(dictionary=True)
 
 	def _create_connection(self) -> (PooledMySQLConnection | MySQLConnectionAbstract | None):
 		connection = None
