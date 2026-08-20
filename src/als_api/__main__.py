@@ -5,4 +5,7 @@ app = Flask(__name__)
 
 app.register_blueprint(users_blueprint)
 
-app.run(debug=True)
+app.run(
+	debug=True,
+	port=5000
+)
