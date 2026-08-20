@@ -13,10 +13,8 @@ class TableManagers():
 	_instance: TableManagers = None
 
 	def __init__(self):
-		print("oi")
 		if getattr(self, "_initialized", False):
 			return
-		print("tudo")
 		self._initialized = True
 
 		self.users = als_db.TableUsersManager(
