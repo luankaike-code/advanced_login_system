@@ -1,11 +1,12 @@
+from typing import Callable
 from .components import Input, H1, Paragraph, Button
 from .page import Page
 from .als_requests import Request
 
 class Login(Page):
-	def __init__(self, geometry: str = "400x300", title: str = "Login") -> None:
+	def __init__(self, successful_login_callback: Callable, geometry: str = "400x300", title: str = "Login") -> None:
 		super().__init__(geometry, title)
-
+		self.__successful_login_callback = successful_login_callback
 		self._create_widgets()
 
 	def check_login_informations(self) -> None:
@@ -16,6 +17,7 @@ class Login(Page):
 
 		if res:
 			self.destroy()
+			self.__successful_login_callback()
 		else:
 			self.error_msg.text.set(value=f"Error: {status_code}")
 	
