@@ -8,7 +8,7 @@ users_blueprint = Blueprint("users", __name__, url_prefix="/users")
 table_managers = TableManagers()
 
 @users_blueprint.route("/login", methods=["POST"])
-def list_users():
+def user_login():
 	data = request.get_json()
 
 	identity: str = data.get("identity")
