@@ -31,7 +31,7 @@ class Login(Page):
 		self.input_password = Input(self, "Senha", "******")
 		self.input_password.pack_all_widgets(padx=10, pady=5)
 
-		self.error_msg = Paragraph(self, text="error")
+		self.error_msg = Paragraph(self, text="")
 		self.error_msg.pack(padx=10, pady=10)
 
 		button = Button(self, text="Entrar" ,command=self.check_login_informations)
