@@ -14,7 +14,9 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 		template_values = ", ".join(["%s"] * len(fields))
 		insert_query_with_template_values = f"{insert_query_without_values} VALUES ({template_values})"
 
-		self._cursor.execute(insert_query_with_template_values, values)
+		_, cursor = self.get_connection()
+		
+		cursor.execute(insert_query_with_template_values, values)
 
 	def _execute_select(self, table: str, fields: List[str], where_query="", values: List[Any]=[]) -> List[RowType | Dict[str, RowItemType]] | Any:
 		table_fields_str = ", ".join(fields)
@@ -25,17 +27,25 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 
 		select_query_complete = f"{select_query} {where_query_correct}"
 
-		self._cursor.execute(select_query_complete, values)
-		return self._cursor.fetchall()
+		_, cursor = self.get_connection()
 
-	def _execute_commit(self) -> None:	
+		cursor.execute(select_query_complete, values)
+		data = cursor.fetchall()
+
+		self.close_connection()
+
+		return data
+
+	def _execute_commit(self) -> None:
 			try:
-				self._connection.commit()
+				self.current_connection.commit()
 			except Error as commit_err:
 				print(f"Error while executing commit: {commit_err}")
 
 				try:
-					self._connection.rollback()
+					self.current_connection.rollback()
 					print(f"Completed rollback")
 				except Error as rollback_err:
 								print(f"Error while executing rollback: {rollback_err}")
+
+			self.close_connection()

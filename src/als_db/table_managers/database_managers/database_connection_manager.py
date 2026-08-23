@@ -1,7 +1,7 @@
-import os, mysql.connector
-from mysql.connector import Error
+import os
+from mysql.connector import Error, pooling
 from mysql.connector.pooling import PooledMySQLConnection
-from mysql.connector.abstracts import MySQLConnectionAbstract
+from mysql.connector.cursor import MySQLCursor
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,21 +16,30 @@ class DatabaseConnectionManager:
 		self.__user = user
 		self.__password = password
 
-		self._update_connection()
+		self._connection_pool = self._create_connection_pool()
 
-	def _update_connection(self) -> None:
-		self._connection = self._create_connection()
+	def get_connection(self) -> tuple[PooledMySQLConnection, MySQLCursor]:
+		connection: PooledMySQLConnection = self._connection_pool.get_connection()
+		cursor = connection.cursor(dictionary=True)
 
-		if self._connection:
-			self._cursor = self._connection.cursor(dictionary=True)
+		self.current_connection = connection
+		self.current_cursor = cursor
 
-	def _create_connection(self) -> (PooledMySQLConnection | MySQLConnectionAbstract | None):
-		connection = None
+		return connection, cursor
+
+	def close_connection(self) -> None:
+		self.current_cursor.close()
+		self.current_connection.close()
+
+	def _create_connection_pool(self) -> pooling.MySQLConnectionPool | None:
+		connection_pool = None
 		connection_attemps = 0
 
-		while connection_attemps < MAX_CONNECTION_ATTEMPS and connection == None:
+		while connection_attemps < MAX_CONNECTION_ATTEMPS and connection_pool == None:
 			try:
-				connection = mysql.connector.connect(
+				connection_pool = pooling.MySQLConnectionPool(
+					pool_name="connection_pool",
+					pool_size=5,
 					host=self.__host,
 					port=self.__port,
 					database=self.__database,
@@ -41,7 +50,7 @@ class DatabaseConnectionManager:
 				connection_attemps += 1
 				print(f"Error #{connection_attemps} throw while connecting to MySQL: {e}; attempting again...")
 
-		return connection
+		return connection_pool
 
 	def __del__(self) -> None:
 		if 'connection' in locals() and self._connection.is_connected():
