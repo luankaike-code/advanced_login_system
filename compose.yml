@@ -1,4 +1,4 @@
-name: basic_login_system
+name: advanced_login_system
 
 services:
   database:
@@ -6,7 +6,7 @@ services:
     container_name: mysql_db
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: basic_login_system_db
+      MYSQL_DATABASE: advanced_login_system_db
     volumes:
       - ./database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql:ro,z
       - db_data:/var/lib/mysql
