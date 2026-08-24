@@ -28,3 +28,18 @@ class Request:
 			Request._token = json["token"]
 		
 		return Request._is_logged, fetch_response.status_code
+
+	@staticmethod
+	def get_self_infos() -> RowUser | None:
+		Request.__check_login_status()
+		json_data = {'token': Request._token}
+
+		fetch_response = requests.post('http://127.0.0.1:5000/users/get_self', json=json_data)
+
+		self_data = fetch_response.json()
+
+		print(f"Request::get_self_infos fetch -> code: {fetch_response.status_code}, response: {self_data}")
+
+		if fetch_response.status_code != 200:
+			return None
+		return RowUser(self_data)
