@@ -19,8 +19,6 @@ class Request:
 
 		json = fetch_response.json()
 
-		fetch_response.status_code
-
 		print(f"Request::try_login fetch -> code: {fetch_response.status_code}, response: {json["response"]}")
 
 		Request._is_logged = fetch_response.status_code == 200
