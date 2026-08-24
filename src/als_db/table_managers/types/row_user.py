@@ -1,8 +1,8 @@
 from mysql.connector.types import RowItemType, RowType
-from typing import List, Dict, Any
+from typing import Dict
 
 class RowUser:
-	def __init__(self, user_data: List[RowType | Dict[str, RowItemType]]):
+	def __init__(self, user_data: Dict[str, RowItemType]):
 		self.id = user_data["user_id"]
 		self.name = user_data["name"]
 		self.email = user_data["email"]
