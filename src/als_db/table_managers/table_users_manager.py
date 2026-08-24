@@ -10,6 +10,22 @@ class TableUsersManager(TableManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__("TABLE_USERS", host, port, database, user, password)
 
+	def get_user_using_id(self, user_id: int) -> RowUser | None:
+		data = self._execute_select(
+			table=self.table_name,
+			fields=[
+				"*",
+			],
+			where_query="user_id = %s",
+			values=[
+				user_id
+			]
+		)
+
+		if len(data) < 1:
+			return None
+		return RowUser(data[0])
+
 	def insert_new_user(self, name: str, email: str, password: str, tel: str, has_sudo_access: bool = False) -> None:
 		try:
 			self.insert_new_user_without_error_handler(name, email, password, tel, has_sudo_access)
