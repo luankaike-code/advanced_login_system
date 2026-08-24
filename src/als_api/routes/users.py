@@ -27,3 +27,21 @@ def user_login():
 	token = table_managers.connections.create_new_connection(data.id)
 
 	return jsonify({"response": "Login successfull", "token": token}), 200
+
+@users_blueprint.route("/get_self", methods=["POST"])
+def get_user_with_token():
+	data = request.get_json()
+
+	token: str = data.get("token")
+
+	if token is None:
+		return jsonify({"response": "Insert token field at your request"}), 401
+
+	user_id = table_managers.connections.get_user_id(token)
+
+	if user_id is None:
+		return jsonify({"response": "Invalid token"}), 401
+
+	user_infos = table_managers.users.get_user_using_id(user_id)
+
+	return jsonify(user_infos.dict), 200
