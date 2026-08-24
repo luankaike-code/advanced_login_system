@@ -23,3 +23,19 @@ class TableConnectionsManager(TableManager):
 		self._execute_commit()
 		
 		return token
+
+	def get_user_id(self, token: str) -> int | None:
+			data = self._execute_select(
+				table=self.table_name,
+				fields=[
+					"user_id",
+				],
+				where_query="token = %s",
+				values=[
+					token
+				]
+			)
+
+			if len(data) < 1:
+				return None
+			return data[0]["user_id"]
