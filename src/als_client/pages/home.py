@@ -1,6 +1,6 @@
 from .components import H1, Paragraph
 from .page import Page
-from .als_requests import Request
+from als_requests import Request
 
 class Home(Page):
 	def __init__(self, geometry: str = "400x300", title: str = "Login") -> None:

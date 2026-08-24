@@ -1,7 +1,7 @@
 from typing import Callable
 from .components import Input, H1, Paragraph, Button
 from .page import Page
-from .als_requests import Request
+from als_requests import Request
 
 class Login(Page):
 	def __init__(self, successful_login_callback: Callable, geometry: str = "400x300", title: str = "Login") -> None:

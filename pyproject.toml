@@ -20,6 +20,7 @@ packages = [
 	{include = "als_db", from = "src"},
 	{include = "als_api", from = "src"},
 	{include = "als_client", from = "src"},
+	{include = "als_request", from = "src"},
 ]
 
 [build-system]
