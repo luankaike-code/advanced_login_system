@@ -1,6 +1,13 @@
-import requests
+import requests, os
+from dotenv import load_dotenv
 from .errors import TryRequestWhithoutLoggedError
 from als_db.table_managers.types import RowUser
+
+load_dotenv()
+
+DOMAIN = os.getenv("DOMAIN")
+URL_LOGIN = f"{DOMAIN}{os.getenv("ROUTE_LOGIN")}"
+URL_GET_SELF = f"{DOMAIN}{os.getenv("ROUTE_GET_SELF")}"
 
 class Request:
 	_token: str = ""
@@ -15,7 +22,7 @@ class Request:
 	def try_login(identity: str, password: str) -> tuple[bool, int]:
 		json_data = {'identity': identity, 'password': password}
 
-		fetch_response = requests.post('http://127.0.0.1:5000/users/login', json=json_data)
+		fetch_response = requests.post(URL_LOGIN, json=json_data)
 
 		json = fetch_response.json()
 
@@ -32,7 +39,7 @@ class Request:
 		Request.__check_login_status()
 		json_data = {'token': Request._token}
 
-		fetch_response = requests.post('http://127.0.0.1:5000/users/get_self', json=json_data)
+		fetch_response = requests.post(URL_GET_SELF, json=json_data)
 
 		self_data = fetch_response.json()
 
