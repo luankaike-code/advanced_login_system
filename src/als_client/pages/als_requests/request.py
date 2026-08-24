@@ -1,8 +1,15 @@
 import requests
+from .errors import TryRequestWhithoutLoggedError
+from als_db.table_managers.types import RowUser
 
 class Request:
 	_token: str = ""
 	_is_logged: bool = False
+
+	@staticmethod
+	def __check_login_status():
+		if not Request._is_logged:
+			raise TryRequestWhithoutLoggedError()
 
 	@staticmethod
 	def try_login(identity: str, password: str) -> tuple[bool, int]:
