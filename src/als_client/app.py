@@ -1,9 +1,11 @@
 import tkinter as tk
 from pages import Login, Home
+from als_requests import Request
+import atexit
 
 class App():
 	def __init__(self):
-		pass
+		atexit.register(Request.logout)
 
 	def _successful_login(self):
 		Home().mainloop()
