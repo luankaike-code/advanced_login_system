@@ -39,3 +39,16 @@ class TableConnectionsManager(TableManager):
 			if len(data) < 1:
 				return None
 			return data[0]["user_id"]
+
+	def destroy_connection_using_token(self, token: int) -> int:
+		count_row_affects = self._execute_delete(
+			table=self.table_name,
+			where_query="token = %s",
+			values=[
+				token,
+			]
+		)
+
+		self._execute_commit()
+
+		return count_row_affects
