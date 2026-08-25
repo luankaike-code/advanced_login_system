@@ -6,7 +6,7 @@ class App():
 		pass
 
 	def _successful_login(self):
-		Home().mainloop
+		Home().mainloop()
 	
 	def start(self):
 		Login(successful_login_callback=self._successful_login).mainloop()
