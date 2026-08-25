@@ -7,6 +7,12 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
 		super().__init__(host, port, database, user, password)
 
+	def __format_where_query(self, where_query) -> str:
+		where_query_striped = where_query.strip()
+		where_query_formated = where_query_striped if where_query_striped.startswith("WHERE") or where_query_striped == "" else f"WHERE {where_query}"
+
+		return where_query_formated
+
 	def _execute_insert(self, table: str, fields: List[str], values: List[Any]) -> None:
 		table_fields_str = ", ".join(fields)
 		insert_query_without_values = f"INSERT INTO {table} ({table_fields_str})"
@@ -21,10 +27,9 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 	def _execute_delete(self, table: str, where_query: str, values: List[Any]) -> int:
 		basic_delete_instrution = f"DELETE FROM {table}"
 
-		where_query_striped = where_query.strip()
-		where_query_correct = where_query_striped if where_query_striped.startswith("WHERE") or where_query_striped == "" else f"WHERE {where_query}"
+		where_query_formated = self.__format_where_query(where_query)
 
-		complete_delete_instrution = f"{basic_delete_instrution} {where_query_correct}"
+		complete_delete_instrution = f"{basic_delete_instrution} {where_query_formated}"
 
 		_, cursor = self.get_connection()
 		
@@ -36,10 +41,9 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 		table_fields_str = ", ".join(fields)
 		select_query = f"SELECT {table_fields_str} FROM {table}"
 
-		where_query_striped = where_query.strip()
-		where_query_correct = where_query_striped if where_query_striped.startswith("WHERE") or where_query_striped == "" else f"WHERE {where_query}"
+		where_query_formated = self.__format_where_query(where_query)
 
-		select_query_complete = f"{select_query} {where_query_correct}"
+		select_query_complete = f"{select_query} {where_query_formated}"
 
 		_, cursor = self.get_connection()
 
