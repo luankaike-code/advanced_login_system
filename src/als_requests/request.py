@@ -15,7 +15,7 @@ class Request:
 	_is_logged: bool = False
 
 	@staticmethod
-	def __check_login_status():
+	def __check_login_status() -> None:
 		if not Request._is_logged:
 			raise TryRequestWhithoutLoggedError()
 
