@@ -6,5 +6,5 @@ class Home(AbstractHome):
 			"Ver minhas informações": lambda: print("Ver minhas informações"),
 			"Acessar tabela de usuários": lambda: print("Acessar tabela de usuários"),
 			"Cadastrar novo usuário": lambda: print("Cadastrar novo usuário"),
-			"Sair": lambda: print("Sair")
+			"Sair": self.destroy
 		}, geometry, title)
