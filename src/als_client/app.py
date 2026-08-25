@@ -1,4 +1,3 @@
-import tkinter as tk
 from pages import Login, Home
 from als_requests import Request
 import atexit
