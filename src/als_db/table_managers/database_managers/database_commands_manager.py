@@ -18,6 +18,20 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 		
 		cursor.execute(insert_query_with_template_values, values)
 
+	def _execute_delete(self, table: str, where_query: str, values: List[Any]) -> int:
+		basic_delete_instrution = f"DELETE FROM {table}"
+
+		where_query_striped = where_query.strip()
+		where_query_correct = where_query_striped if where_query_striped.startswith("WHERE") or where_query_striped == "" else f"WHERE {where_query}"
+
+		complete_delete_instrution = f"{basic_delete_instrution} {where_query_correct}"
+
+		_, cursor = self.get_connection()
+		
+		cursor.execute(complete_delete_instrution, values)
+
+		return cursor.rowcount
+
 	def _execute_select(self, table: str, fields: List[str], where_query="", values: List[Any]=[]) -> List[RowType | Dict[str, RowItemType]] | Any:
 		table_fields_str = ", ".join(fields)
 		select_query = f"SELECT {table_fields_str} FROM {table}"
