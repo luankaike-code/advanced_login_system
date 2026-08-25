@@ -7,6 +7,7 @@ load_dotenv()
 
 DOMAIN = os.getenv("DOMAIN")
 URL_LOGIN = f"{DOMAIN}{os.getenv("ROUTE_LOGIN")}"
+URL_LOGOUT = f"{DOMAIN}{os.getenv("ROUTE_LOGOUT")}"
 URL_GET_SELF = f"{DOMAIN}{os.getenv("ROUTE_GET_SELF")}"
 
 class Request:
@@ -33,6 +34,26 @@ class Request:
 			Request._token = json["token"]
 		
 		return Request._is_logged, fetch_response.status_code
+
+	@staticmethod
+	def logout() -> None:
+		if not Request._is_logged:
+			print(f"Request::logout print: you not logged")
+			return
+		elif Request._token.strip() == "":
+			print(f"Request::logout print: you not have token")
+			Request._is_logged = False
+			return
+
+		json_data = {"token": Request._token}
+		
+		fetch_response = requests.post(URL_LOGOUT, json=json_data)
+
+		json = fetch_response.json()
+
+		print(f"Request::logout fetch -> code: {fetch_response.status_code}, response: {json["response"]}")
+		URL_LOGOUT
+		
 
 	@staticmethod
 	def get_self_infos() -> RowUser | None:
