@@ -6,7 +6,7 @@ class TableConnectionsManager(TableManager):
 	def __init__(self, host: str, port: int, database: str, user: str, password: str):
 		super().__init__("TABLE_CONNECTIONS", host, port, database, user, password)
 
-	def create_new_connection(self, user_id: int):
+	def create_new_connection(self, user_id: int) -> str:
 		token = secrets.token_hex(127)
 		self._execute_insert(
 			table=self.table_name,
