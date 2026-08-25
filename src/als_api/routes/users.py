@@ -45,3 +45,19 @@ def get_user_with_token():
 	user_infos = table_managers.users.get_user_using_id(user_id)
 
 	return jsonify(user_infos.dict), 200
+
+@users_blueprint.route("/logout", methods=["POST"])
+def user_logout():
+	data = request.get_json()
+
+	token: str = data.get("token")
+
+	if token is None:
+		return jsonify({"response": "Insert token field at your request"}), 401
+
+	rows_affects = table_managers.connections.destroy_connection_using_token(token)
+
+	if rows_affects < 1:
+		return jsonify({"response": "Invalid token"}), 401
+
+	return jsonify({"response": "Logout sucessfull"}), 200
