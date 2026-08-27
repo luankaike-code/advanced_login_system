@@ -21,7 +21,7 @@ class Request:
 
 	@staticmethod
 	def try_login(identity: str, password: str) -> tuple[bool, int]:
-		json_data = {'identity': identity, 'password': password}
+		json_data = {"identity": identity, "password": password}
 
 		fetch_response = requests.post(URL_LOGIN, json=json_data)
 
@@ -58,7 +58,7 @@ class Request:
 	@staticmethod
 	def get_self_infos() -> RowUser | None:
 		Request.__check_login_status()
-		json_data = {'token': Request._token}
+		json_data = {"token": Request._token}
 
 		fetch_response = requests.post(URL_GET_SELF, json=json_data)
 
