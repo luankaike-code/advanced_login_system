@@ -1,4 +1,3 @@
-from .table_users_manager import TableUsersManager
-from .table_connections_manager import TableConnectionsManager
+from .table_managers import TableManagers
 
-__all__ = ["TableUsersManager", "TableConnectionsManager"]
+__all__ = ["TableManagers"]

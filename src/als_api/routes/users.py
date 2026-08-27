@@ -1,10 +1,20 @@
 from flask import Blueprint, jsonify, request
-
-from .table_managers import TableManagers
+import os
+from als_db import TableManagers
 
 users_blueprint = Blueprint("users", __name__, url_prefix="/users")
 
-table_managers = TableManagers()
+from dotenv import load_dotenv
+
+load_dotenv()
+
+host = os.getenv("HOST")
+port = int(os.getenv("PORT"))
+database = os.getenv("DATABASE")
+user = os.getenv("DATABASE_USER")
+password = os.getenv("PASSWORD")
+
+table_managers = TableManagers(host, port, database, user, password)
 
 @users_blueprint.route("/login", methods=["POST"])
 def user_login():
