@@ -1,4 +1,3 @@
-import os
 from flask import Blueprint, jsonify, request
 
 from .table_managers import TableManagers
