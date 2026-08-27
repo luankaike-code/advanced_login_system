@@ -7,6 +7,6 @@ class RowUser:
 		self.id = user_data["user_id"]
 		self.name = user_data["name"]
 		self.email = user_data["email"]
-		self.paaword = user_data["password"]
+		self.password = user_data["password"]
 		self.tel = user_data["tel"]
 		self.has_sudo_access = user_data["has_sudo_access"]
