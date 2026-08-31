@@ -2,12 +2,14 @@ import customtkinter as ctk
 from .components import H1, Paragraph, Button, Table
 from .page import Page
 from als_requests import Request
+from typing import Callable
 
 class SelfInformations(Page):
-	def __init__(self, master: ctk.CTk, geometry: str = "400x500", title: str = "Informações") -> None:
+	def __init__(self, master: ctk.CTk, back_button_callback=Callable, geometry: str = "400x500", title: str = "Informações") -> None:
 		super().__init__(master, geometry, title)
 		
 		self.infos = Request.get_self_infos()
+		self.back_button_callback = back_button_callback
 
 		self._create_widgets()
 	
@@ -26,3 +28,5 @@ class SelfInformations(Page):
 
 		table.set_content(table_content)
 		table.pack()
+
+		Button(self, text="Voltar", command=self.back_button_callback).pack()

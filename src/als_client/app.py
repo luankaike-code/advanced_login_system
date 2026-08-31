@@ -25,7 +25,7 @@ class App(ctk.CTk):
 		self.current_page.pack(fill="both", expand=True)
 
 	def __to_go_self_informations(self) -> None:
-		self_informations_page = SelfInformations(self)
+		self_informations_page = SelfInformations(self, back_button_callback=self._to_go_home)
 		
 		self.__update_current_page(self_informations_page)
 
