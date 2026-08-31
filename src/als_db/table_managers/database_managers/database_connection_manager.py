@@ -1,7 +1,7 @@
 import os
 from mysql.connector import Error, pooling
 from mysql.connector.pooling import PooledMySQLConnection
-from mysql.connector.cursor import MySQLCursor
+from mysql.connector.cursor import MySQLCursorBufferedDict
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,9 +18,9 @@ class DatabaseConnectionManager:
 
 		self._connection_pool = self._create_connection_pool()
 
-	def get_connection(self) -> tuple[PooledMySQLConnection, MySQLCursor]:
+	def get_connection(self) -> tuple[PooledMySQLConnection, MySQLCursorBufferedDict]:
 		connection: PooledMySQLConnection = self._connection_pool.get_connection()
-		cursor = connection.cursor(dictionary=True)
+		cursor: MySQLCursorBufferedDict = connection.cursor(buffered=True, dictionary=True)
 
 		self.current_connection = connection
 		self.current_cursor = cursor
