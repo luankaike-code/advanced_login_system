@@ -10,11 +10,11 @@ class App(ctk.CTk):
 		atexit.register(Request.logout)
 		self.current_page = None
 
-	def __destroy_current_page(self):
+	def __destroy_current_page(self) -> None:
 		if self.current_page and self.current_page.winfo_exists():
 			self.current_page.destroy()
 
-	def __update_current_page(self, new_page: Page):
+	def __update_current_page(self, new_page: Page) -> None:
 		self.__destroy_current_page()
 
 		self.current_page = new_page
