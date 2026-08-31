@@ -1,10 +1,11 @@
+import customtkinter as ctk
 from .components import H1, Paragraph, Button, Table
 from .page import Page
 from als_requests import Request
 
 class SelfInformations(Page):
-	def __init__(self, geometry: str = "400x500", title: str = "Informações") -> None:
-		super().__init__(geometry, title)
+	def __init__(self, master: ctk.CTk, geometry: str = "400x500", title: str = "Informações") -> None:
+		super().__init__(master, geometry, title)
 		
 		self.infos = Request.get_self_infos()
 

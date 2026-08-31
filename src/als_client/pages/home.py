@@ -1,11 +1,12 @@
+import customtkinter as ctk
 from typing import Dict, Callable
 from .components import H1, Paragraph, Button
 from .page import Page
 from als_requests import Request
 
 class Home(Page):
-	def __init__(self,  buttons: Dict[str, Callable], geometry: str = "400x300", title: str = "Login") -> None:
-		super().__init__(geometry, title)
+	def __init__(self, master: ctk.CTk, buttons: Dict[str, Callable], geometry: str = "400x300", title: str = "Login") -> None:
+		super().__init__(master, geometry, title)
 
 		self._create_widgets(buttons)
 	
