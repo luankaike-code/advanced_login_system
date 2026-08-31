@@ -34,8 +34,8 @@ class App(ctk.CTk):
 
 		self.__update_current_page(home_page)
 	
-	def start(self) -> None:
+	def mainloop(self) -> None:
 		login_page = Login(self, successful_login_callback=self._go_to_home)
 		self.__update_current_page(login_page)
 
-		self.mainloop()
+		super().mainloop()
