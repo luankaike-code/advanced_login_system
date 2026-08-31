@@ -18,6 +18,10 @@ class App(ctk.CTk):
 		self.__destroy_current_page()
 
 		self.current_page = new_page
+
+		self.title(self.current_page.title)
+		self.geometry(self.current_page.geometry)
+
 		self.current_page.pack(fill="both", expand=True)
 
 	def _go_to_home(self) -> None:
