@@ -24,9 +24,14 @@ class App(ctk.CTk):
 
 		self.current_page.pack(fill="both", expand=True)
 
+	def __go_to_self_informations(self) -> None:
+		self_informations_page = SelfInformations(self)
+		
+		self.__update_current_page(self_informations_page)
+
 	def _go_to_home(self) -> None:
 		home_page = Home(self, {
-			"Ver minhas informações": lambda: print("Ver minhas informações"),
+			"Ver minhas informações": self.__go_to_self_informations,
 			"Acessar tabela de usuários": lambda: print("Acessar tabela de usuários"),
 			"Cadastrar novo usuário": lambda: print("Cadastrar novo usuário"),
 			"Sair": self.destroy
