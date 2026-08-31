@@ -3,10 +3,10 @@ from als_requests import Request
 import atexit
 
 class App():
-	def __init__(self):
+	def __init__(self) -> None:
 		atexit.register(Request.logout)
 
-	def _successful_login(self):
+	def _successful_login(self) -> None:
 		Home({
 			"Ver minhas informações": lambda: print("Ver minhas informações"),
 			"Acessar tabela de usuários": lambda: print("Acessar tabela de usuários"),
@@ -14,5 +14,5 @@ class App():
 			"Sair": lambda: print("Sair")
 		}).mainloop()
 	
-	def start(self):
+	def start(self) -> None:
 		Login(successful_login_callback=self._successful_login).mainloop()
