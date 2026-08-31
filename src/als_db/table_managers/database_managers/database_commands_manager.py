@@ -54,16 +54,21 @@ class DatabaseCommandsManager(DatabaseConnectionManager):
 
 		return data
 
+	def _excute_rollback(self) -> None:
+		try:
+			self.current_connection.rollback()
+			print(f"Completed rollback")
+		except Error as rollback_err:
+						print(f"Error while executing rollback: {rollback_err}")
+		
+		self.close_connection()
+	
 	def _execute_commit(self) -> None:
 			try:
 				self.current_connection.commit()
 			except Error as commit_err:
 				print(f"Error while executing commit: {commit_err}")
 
-				try:
-					self.current_connection.rollback()
-					print(f"Completed rollback")
-				except Error as rollback_err:
-								print(f"Error while executing rollback: {rollback_err}")
+				self._excute_rollback()
 
 			self.close_connection()
