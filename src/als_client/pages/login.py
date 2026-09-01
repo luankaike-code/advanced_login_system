@@ -11,8 +11,8 @@ class Login(Page):
 		self._create_widgets()
 
 	def check_login_informations(self) -> None:
-		identity = self.input_identity.entry_value.get()
-		password = self.input_password.entry_value.get()
+		identity = self.input_identity.get_value()
+		password = self.input_password.get_value()
 
 		res, status_code = Request.try_login(identity, password)
 
