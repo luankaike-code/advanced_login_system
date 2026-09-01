@@ -1,4 +1,5 @@
 import customtkinter as CTk
+from .errors import InvalidMasterError
 
 class Table(CTk.CTkFrame):
 	def __init__(self, master, width = 200, height = 200):
@@ -18,4 +19,6 @@ class Table(CTk.CTkFrame):
 
 		for row, row_data in enumerate(self.__content_data):
 			for column, component in enumerate(row_data):
+				if component.master != self:
+					raise InvalidMasterError("All table´s children must have it how master")
 				component.grid(row=row, column=column, padx=20, pady=20)
