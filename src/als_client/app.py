@@ -1,4 +1,4 @@
-from pages import Login, Home, SelfInformations
+from pages import Login, Home, SelfInformations, FormUserInformations
 from pages.page import Page
 import customtkinter as ctk
 from als_requests import Request
@@ -33,7 +33,7 @@ class App(ctk.CTk):
 		home_page = Home(self, {
 			"Ver minhas informações": self.__to_go_self_informations,
 			"Acessar tabela de usuários": lambda: print("Acessar tabela de usuários"),
-			"Cadastrar novo usuário": lambda: print("Cadastrar novo usuário"),
+			"Cadastrar novo usuário": self._to_go_register_new_user,
 			"deslogar": self._to_go_login,
 			"Sair": self.destroy
 		})
@@ -46,6 +46,10 @@ class App(ctk.CTk):
 
 		login_page = Login(self, successful_login_callback=self._to_go_home)
 		self.__update_current_page(login_page)
+
+	def _to_go_register_new_user(self) -> None:
+			register_new_user_page = FormUserInformations(self, button_text="Cadastrar", title="Cadastrar novo usuário")
+			self.__update_current_page(register_new_user_page)
 	
 	def mainloop(self) -> None:
 		self._to_go_login(False)
