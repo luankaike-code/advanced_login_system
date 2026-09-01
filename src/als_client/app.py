@@ -38,9 +38,15 @@ class App(ctk.CTk):
 		})
 
 		self.__update_current_page(home_page)
-	
-	def mainloop(self) -> None:
+
+	def _to_go_login(self, try_logout: bool = True) -> None:
+		if try_logout:
+			Request.logout()
+
 		login_page = Login(self, successful_login_callback=self._to_go_home)
 		self.__update_current_page(login_page)
+	
+	def mainloop(self) -> None:
+		self._to_go_login(False)
 
 		super().mainloop()
