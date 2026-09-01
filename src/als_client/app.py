@@ -34,6 +34,7 @@ class App(ctk.CTk):
 			"Ver minhas informações": self.__to_go_self_informations,
 			"Acessar tabela de usuários": lambda: print("Acessar tabela de usuários"),
 			"Cadastrar novo usuário": lambda: print("Cadastrar novo usuário"),
+			"deslogar": self._to_go_login,
 			"Sair": self.destroy
 		})
 
