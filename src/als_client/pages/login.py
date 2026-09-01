@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from typing import Callable
-from .components import Input, H1, Paragraph, Button
+from .components import Input, PasswordInput, H1, Paragraph, Button
 from .page import Page
 from als_requests import Request
 
@@ -29,7 +29,7 @@ class Login(Page):
 		self.input_identity = Input(self, "Identificador", "Nome / Email / Telefone")
 		self.input_identity.pack_all_widgets(padx=10, pady=5)
 
-		self.input_password = Input(self, "Senha", "******")
+		self.input_password = PasswordInput(self, "Senha", "******")
 		self.input_password.pack_all_widgets(padx=10, pady=5)
 
 		self.error_msg = Paragraph(self, text="")
