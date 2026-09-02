@@ -19,6 +19,7 @@ class FormUserInformations(Page):
 		self.input_name = Input(self, "Nome", "José Almeida")
 		self.input_email = Input(self, "Email", "JoséAlmeida@gmail.com")
 		self.input_password = PasswordInput(self, "Senha", "******")
+		self.input_confirm_password = PasswordInput(self, "Confirme a Senha", "******")
 		self.input_tel = Input(self, "Telefone", "(00) 0 0000-0000")
 
 		self._create_widgets()
@@ -36,7 +37,11 @@ class FormUserInformations(Page):
 
 		self.input_name.pack(padx=10, pady=5)
 		self.input_email.pack(padx=10, pady=5)
-		self.input_password.pack(padx=10, pady=5)
+
+		if self.display_password_input:
+			self.input_password.pack(padx=10, pady=5)
+			self.input_confirm_password.pack(padx=10, pady=5)
+		
 		self.input_tel.pack(padx=10, pady=5)
 
 		Button(self, self.button_text, command=self.__send_button_callback).pack(padx=10, pady=5)
