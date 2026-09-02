@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from .page import Page
-from .components import H1, Input, PasswordInput, Button
+from .components import H1, Input, PasswordInput, Button, Paragraph
 
 class FormUserInformations(Page):
 	def __init__(
@@ -22,7 +22,15 @@ class FormUserInformations(Page):
 		self.input_confirm_password = PasswordInput(self, "Confirme a Senha", "******")
 		self.input_tel = Input(self, "Telefone", "(00) 0 0000-0000")
 
+		self.error_msg = Paragraph(self, "")
+
 		self._create_widgets()
+
+	def update_error_msg(self, msg: str) -> None:
+		self.error_msg.text.set(msg)
+
+	def clear_error_msg(self) -> None:
+			self.error_msg.text.set("")
 
 	def __send_button_callback(self) -> None:
 		print(
@@ -43,5 +51,7 @@ class FormUserInformations(Page):
 			self.input_confirm_password.pack(padx=10, pady=5)
 		
 		self.input_tel.pack(padx=10, pady=5)
+
+		self.error_msg.pack(padx=10, pady=5)
 
 		Button(self, self.button_text, command=self.__send_button_callback).pack(padx=10, pady=5)
