@@ -1,5 +1,5 @@
-from .form_user_informations import FormUserInformations
+from .abstract_form_user_informations import AbstractFormUserInformations
 
-class RegisterNewUser(FormUserInformations):
+class RegisterNewUser(AbstractFormUserInformations):
 	def __init__(self, master, geometry: str = "400x500"):
 		super().__init__(master, button_text="Cadastrar", title="Cadastrar usuário", display_password_input=True, geometry=geometry)
