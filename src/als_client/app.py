@@ -1,4 +1,4 @@
-from pages import Login, Home, SelfInformations, FormUserInformations
+from pages import Login, Home, SelfInformations, RegisterNewUser
 from pages.page import Page
 import customtkinter as ctk
 from als_requests import Request
@@ -48,7 +48,7 @@ class App(ctk.CTk):
 		self.__update_current_page(login_page)
 
 	def _to_go_register_new_user(self) -> None:
-			register_new_user_page = FormUserInformations(self, button_text="Cadastrar", title="Cadastrar novo usuário")
+			register_new_user_page = RegisterNewUser(self)
 			self.__update_current_page(register_new_user_page)
 	
 	def mainloop(self) -> None:
