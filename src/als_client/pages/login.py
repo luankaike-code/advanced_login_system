@@ -27,10 +27,10 @@ class Login(Page):
 		title.pack(padx=10, pady=10)
 
 		self.input_identity = Input(self, "Identificador", "Nome / Email / Telefone")
-		self.input_identity.pack_all_widgets(padx=10, pady=5)
+		self.input_identity.pack(padx=10, pady=5)
 
 		self.input_password = PasswordInput(self, "Senha", "******")
-		self.input_password.pack_all_widgets(padx=10, pady=5)
+		self.input_password.pack(padx=10, pady=5)
 
 		self.error_msg = Paragraph(self, text="")
 		self.error_msg.pack(padx=10, pady=10)

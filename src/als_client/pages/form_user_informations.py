@@ -34,9 +34,9 @@ class FormUserInformations(Page):
 	def _create_widgets(self) -> None:
 		H1(self, self.title).pack(padx=10, pady=10)
 
-		self.input_name.pack_all_widgets(padx=10, pady=5)
-		self.input_email.pack_all_widgets(padx=10, pady=5)
-		self.input_password.pack_all_widgets(padx=10, pady=5)
-		self.input_tel.pack_all_widgets(padx=10, pady=5)
+		self.input_name.pack(padx=10, pady=5)
+		self.input_email.pack(padx=10, pady=5)
+		self.input_password.pack(padx=10, pady=5)
+		self.input_tel.pack(padx=10, pady=5)
 
 		Button(self, self.button_text, command=self.__send_button_callback).pack(padx=10, pady=5)
