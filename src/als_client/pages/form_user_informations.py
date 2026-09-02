@@ -32,13 +32,24 @@ class FormUserInformations(Page):
 	def clear_error_msg(self) -> None:
 			self.error_msg.text.set("")
 
-	def __send_button_callback(self) -> None:
-		print(
-			self.input_name.get_value(),
-			self.input_email.get_value(),
-			self.input_password.get_value(),
-			self.input_tel.get_value(),
-		)
+	def __send_button_callback(self) -> bool:
+		inputs = [
+			self.input_name,
+			self.input_email,
+			self.input_password,
+			self.input_confirm_password,
+			self.input_tel,
+		]
+
+		for input in inputs:
+			if not self.__generic_input_validator(input):
+				return False
+
+	def __generic_input_validator(self, input: Input) -> bool:
+		value = self.input_name.get_value().strip()
+		if value == "":
+			self.update_error_msg("Preencha todos os campos")
+			return False
 
 	def _create_widgets(self) -> None:
 		H1(self, self.title).pack(padx=10, pady=10)
