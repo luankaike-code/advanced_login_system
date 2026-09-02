@@ -4,7 +4,7 @@ from .page import Page
 from als_requests import Request
 from typing import Callable
 
-class SelfInformations(Page):
+class SelfInformationsPage(Page):
 	def __init__(self, master: ctk.CTk, back_button_callback: Callable, update_button_callback: Callable, geometry: str = "400x500", title: str = "Informações") -> None:
 		super().__init__(master, geometry, title)
 		

@@ -1,4 +1,4 @@
-from pages import Login, Home, SelfInformations, RegisterNewUser, UpdateUserInformations
+from pages import LoginPage, HomePage, SelfInformationsPage, RegisterNewUserPage, UpdateUserInformationsPage
 from pages.page import Page
 import customtkinter as ctk
 from als_requests import Request
@@ -25,7 +25,7 @@ class App(ctk.CTk):
 		self.current_page.pack(fill="both", expand=True)
 
 	def __to_go_self_informations(self) -> None:
-		self_informations_page = SelfInformations(self, 
+		self_informations_page = SelfInformationsPage(self, 
 		  back_button_callback=self._to_go_home,
 		  update_button_callback=self._to_go_update_user_informations
 		)
@@ -33,7 +33,7 @@ class App(ctk.CTk):
 		self.__update_current_page(self_informations_page)
 
 	def _to_go_home(self) -> None:
-		home_page = Home(self, {
+		home_page = HomePage(self, {
 			"Ver minhas informações": self.__to_go_self_informations,
 			"Atualizar minhas informações": self._to_go_update_user_informations,
 			"Acessar tabela de usuários": lambda: print("Acessar tabela de usuários"),
@@ -48,16 +48,16 @@ class App(ctk.CTk):
 		if try_logout:
 			Request.logout()
 
-		login_page = Login(self, successful_login_callback=self._to_go_home)
+		login_page = LoginPage(self, successful_login_callback=self._to_go_home)
 		self.__update_current_page(login_page)
 
 	def _to_go_update_user_informations(self) -> None:
-		update_user_informations_page = UpdateUserInformations(self)
+		update_user_informations_page = UpdateUserInformationsPage(self)
 
 		self.__update_current_page(update_user_informations_page)
 
 	def _to_go_register_new_user(self) -> None:
-			register_new_user_page = RegisterNewUser(self)
+			register_new_user_page = RegisterNewUserPage(self)
 			self.__update_current_page(register_new_user_page)
 	
 	def mainloop(self) -> None:

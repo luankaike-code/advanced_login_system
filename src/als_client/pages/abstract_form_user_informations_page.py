@@ -2,7 +2,7 @@ import customtkinter as ctk
 from .page import Page
 from .components import H1, Input, PasswordInput, Button, Paragraph
 
-class AbstractFormUserInformations(Page):
+class AbstractFormUserInformationsPage(Page):
 	def __init__(
 			self, 
 			master: ctk.CTk,

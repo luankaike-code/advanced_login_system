@@ -4,7 +4,7 @@ from .components import Input, PasswordInput, H1, Paragraph, Button
 from .page import Page
 from als_requests import Request
 
-class Login(Page):
+class LoginPage(Page):
 	def __init__(self, master: ctk.CTk, successful_login_callback: Callable, geometry: str = "400x300", title: str = "Login") -> None:
 		super().__init__(master, geometry, title)
 		self.__successful_login_callback = successful_login_callback

@@ -4,7 +4,7 @@ from .components import H1, Paragraph, Button
 from .page import Page
 from als_requests import Request
 
-class Home(Page):
+class HomePage(Page):
 	def __init__(self, master: ctk.CTk, buttons: Dict[str, Callable], geometry: str = "400x350", title: str = "Inicio") -> None:
 		super().__init__(master, geometry, title)
 
