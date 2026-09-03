@@ -2,7 +2,7 @@ import customtkinter as ctk
 from .component import Component
 
 class Input(Component):
-	def __init__(self, window: ctk.CTk, label: str, placeholder: str="") -> None:
+	def __init__(self, window: ctk.CTk, label: str, placeholder: str="", value: str = "") -> None:
 		super().__init__(window)
 
 		self._widgets.update({
@@ -10,6 +10,8 @@ class Input(Component):
 			"entry": ctk.CTkEntry(window, placeholder_text=placeholder)
 		})
 
+		if value:
+			self._widgets["entry"].insert(0, value)
 		self.default_entry_border_color = self._widgets["entry"].cget("border_color")
 
 	def set_normal(self) -> None:
