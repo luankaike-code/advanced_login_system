@@ -32,6 +32,20 @@ class AbstractFormUserInformationsPage(Page):
 	def clear_error_msg(self) -> None:
 			self.error_msg.text.set("")
 
+	def clear_all_errors(self) -> None:
+		inputs = [
+			self.input_name,
+			self.input_email,
+			self.input_password,
+			self.input_confirm_password,
+			self.input_tel,
+		]
+
+		self.clear_error_msg()
+
+		for input in inputs:
+			input.set_normal()
+
 	def __send_button_callback(self) -> bool:
 		inputs = [
 			self.input_name,
@@ -41,8 +55,7 @@ class AbstractFormUserInformationsPage(Page):
 			self.input_tel,
 		]
 
-		for input in inputs:
-			input.set_normal()
+		self.clear_all_errors()
 
 		for input in inputs:
 			if not self.__generic_input_validator(input):
