@@ -2,8 +2,8 @@ import customtkinter as ctk
 from .input import Input
 
 class PasswordInput(Input):
-	def __init__(self, window: ctk.CTk, label: str, placeholder: str = ""):
-		super().__init__(window, label, placeholder)
+	def __init__(self, window: ctk.CTk, label: str, placeholder: str = "", value: str = ""):
+		super().__init__(window, label, placeholder, value)
 
 		self.blind_char = "*"
 
