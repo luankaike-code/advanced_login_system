@@ -3,7 +3,7 @@ from .component import Component
 
 class Input(Component):
 	def __init__(self, window: ctk.CTk, label: str, placeholder: str="") -> None:
-		super().__init__()
+		super().__init__(window)
 
 		self._widgets.update({
 			"label": ctk.CTkLabel(window, text=label),

@@ -2,7 +2,8 @@ import customtkinter as ctk
 from typing import Dict
 
 class Component():
-	def __init__(self) -> None:
+	def __init__(self, window: ctk.CTk) -> None:
+		self.master = window
 		self._widgets: Dict[str, ctk.CTkBaseClass] = {}
 
 	def pack(self, padx: int, pady: int) -> None:
