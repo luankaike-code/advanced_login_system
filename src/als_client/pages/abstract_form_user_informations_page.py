@@ -42,6 +42,9 @@ class AbstractFormUserInformationsPage(Page):
 		]
 
 		for input in inputs:
+			input.set_normal()
+
+		for input in inputs:
 			if not self.__generic_input_validator(input):
 				return False
 
@@ -49,6 +52,7 @@ class AbstractFormUserInformationsPage(Page):
 		value = input.get_value().strip()
 
 		if value == "":
+			input.set_error()
 			self.update_error_msg("Preencha todos os campos")
 			return False
 		
