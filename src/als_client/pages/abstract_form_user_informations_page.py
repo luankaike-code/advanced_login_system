@@ -46,10 +46,13 @@ class AbstractFormUserInformationsPage(Page):
 				return False
 
 	def __generic_input_validator(self, input: Input) -> bool:
-		value = self.input_name.get_value().strip()
+		value = input.get_value().strip()
+
 		if value == "":
 			self.update_error_msg("Preencha todos os campos")
 			return False
+		
+		return True
 
 	def _create_widgets(self) -> None:
 		H1(self, self.title).pack(padx=10, pady=10)
