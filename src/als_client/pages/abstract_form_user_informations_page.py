@@ -64,14 +64,7 @@ class AbstractFormUserInformationsPage(Page):
 	def _create_widgets(self) -> None:
 		H1(self, self.title).pack(padx=10, pady=10)
 
-		self.input_name.pack(padx=10, pady=5)
-		self.input_email.pack(padx=10, pady=5)
-
-		self.input_password.pack(padx=10, pady=5)
-		self.input_confirm_password.pack(padx=10, pady=5)
-		
-		self.input_tel.pack(padx=10, pady=5)
-
-		self.error_msg.pack(padx=10, pady=5)
+		for input in self.inputs:
+			input.pack(padx=10, pady=5)
 
 		Button(self, self.button_text, command=self.__send_button_callback).pack(padx=10, pady=5)
