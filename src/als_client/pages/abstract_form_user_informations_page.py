@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from .page import Page
 from .components import H1, Input, PasswordInput, Button, Paragraph
+from als_db.table_managers.types import RowUser
 
 class AbstractFormUserInformationsPage(Page):
 	def __init__(
@@ -8,17 +9,18 @@ class AbstractFormUserInformationsPage(Page):
 			master: ctk.CTk,
 			button_text: str,
 			title: str,
+			default_inputs_value: RowUser = RowUser({}),
 			geometry: str = "400x500"
 		):
 		super().__init__(master, geometry, title)
 
 		self.button_text = button_text
 
-		self.input_name = Input(self, "Nome", "José Almeida")
-		self.input_email = Input(self, "Email", "JoséAlmeida@gmail.com")
-		self.input_password = PasswordInput(self, "Senha", "******")
+		self.input_name = Input(self, "Nome", "José Almeida", default_inputs_value.name)
+		self.input_email = Input(self, "Email", "JoséAlmeida@gmail.com", default_inputs_value.email)
+		self.input_password = PasswordInput(self, "Senha", "******", default_inputs_value.password)
 		self.input_confirm_password = PasswordInput(self, "Confirme a Senha", "******")
-		self.input_tel = Input(self, "Telefone", "(00) 0 0000-0000")
+		self.input_tel = Input(self, "Telefone", "(00) 0 0000-0000", default_inputs_value.tel)
 
 		self.inputs = [
 			self.input_name,
