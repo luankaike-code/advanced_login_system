@@ -8,13 +8,11 @@ class AbstractFormUserInformationsPage(Page):
 			master: ctk.CTk,
 			button_text: str,
 			title: str,
-			display_password_input: bool = False,
 			geometry: str = "400x500"
 		):
 		super().__init__(master, geometry, title)
 
 		self.button_text = button_text
-		self.display_password_input = display_password_input
 
 		self.input_name = Input(self, "Nome", "José Almeida")
 		self.input_email = Input(self, "Email", "JoséAlmeida@gmail.com")
@@ -69,9 +67,8 @@ class AbstractFormUserInformationsPage(Page):
 		self.input_name.pack(padx=10, pady=5)
 		self.input_email.pack(padx=10, pady=5)
 
-		if self.display_password_input:
-			self.input_password.pack(padx=10, pady=5)
-			self.input_confirm_password.pack(padx=10, pady=5)
+		self.input_password.pack(padx=10, pady=5)
+		self.input_confirm_password.pack(padx=10, pady=5)
 		
 		self.input_tel.pack(padx=10, pady=5)
 

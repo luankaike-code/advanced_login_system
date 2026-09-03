@@ -2,4 +2,4 @@ from .abstract_form_user_informations_page import AbstractFormUserInformationsPa
 
 class UpdateUserInformationsPage(AbstractFormUserInformationsPage):
 	def __init__(self, master, geometry: str = "400x500"):
-		super().__init__(master, button_text="Atualizar", title="Atualizar usuário", display_password_input=True, geometry=geometry)
+		super().__init__(master, button_text="Atualizar", title="Atualizar usuário", geometry=geometry)
