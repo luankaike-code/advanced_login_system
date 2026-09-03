@@ -22,6 +22,14 @@ class AbstractFormUserInformationsPage(Page):
 		self.input_confirm_password = PasswordInput(self, "Confirme a Senha", "******")
 		self.input_tel = Input(self, "Telefone", "(00) 0 0000-0000")
 
+		self.inputs = [
+			self.input_name,
+			self.input_email,
+			self.input_password,
+			self.input_confirm_password,
+			self.input_tel
+		]
+
 		self.error_msg = Paragraph(self, "")
 
 		self._create_widgets()
@@ -33,31 +41,15 @@ class AbstractFormUserInformationsPage(Page):
 			self.error_msg.text.set("")
 
 	def clear_all_errors(self) -> None:
-		inputs = [
-			self.input_name,
-			self.input_email,
-			self.input_password,
-			self.input_confirm_password,
-			self.input_tel,
-		]
-
 		self.clear_error_msg()
 
-		for input in inputs:
+		for input in self.inputs:
 			input.set_normal()
 
 	def __send_button_callback(self) -> bool:
-		inputs = [
-			self.input_name,
-			self.input_email,
-			self.input_password,
-			self.input_confirm_password,
-			self.input_tel,
-		]
-
 		self.clear_all_errors()
 
-		for input in inputs:
+		for input in self.inputs:
 			if not self.__generic_input_validator(input):
 				return False
 
